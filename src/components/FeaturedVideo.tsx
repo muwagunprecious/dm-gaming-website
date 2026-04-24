@@ -23,15 +23,14 @@ export default function FeaturedVideo() {
           viewport={{ once: true }}
           className="relative group cursor-pointer"
         >
-          {/* Big Video Card */}
-          <div className="aspect-video rounded-[2.5rem] overflow-hidden bg-card border border-border-color shadow-[0_0_30px_rgba(0,0,0,0.05)] dark:shadow-[0_0_50px_var(--glow-color)] relative">
+          {/* Big Video Card: Weaponized Chassis */}
+          <div className="aspect-video relative p-[2px] bg-gradient-to-br from-primary/50 via-transparent to-accent/50 [clip-path:polygon(8%_0,100%_0,100%_92%,92%_100%,0_100%,0_8%)] shadow-[0_0_50px_var(--glow-color)] group hover:shadow-[0_0_80px_var(--glow-color)] transition-shadow duration-500">
+            <div className="w-full h-full relative bg-[#050b14] [clip-path:polygon(8%_0,100%_0,100%_92%,92%_100%,0_100%,0_8%)] overflow-hidden">
              <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity z-10"></div>
              
-             {/* HUD Corners */}
-             <div className="hud-corner top-4 left-4 border-t-2 border-l-2 opacity-30 z-20"></div>
-             <div className="hud-corner top-4 right-4 border-t-2 border-r-2 opacity-30 z-20"></div>
-             <div className="hud-corner bottom-4 left-4 border-b-2 border-l-2 opacity-30 z-20"></div>
-             <div className="hud-corner bottom-4 right-4 border-b-2 border-r-2 opacity-30 z-20"></div>
+             {/* HUD Centers */}
+             <div className="absolute inset-x-0 h-[1px] bg-white/10 top-1/2 -translate-y-1/2 z-10"></div>
+             <div className="absolute inset-y-0 w-[1px] bg-white/10 left-1/2 -translate-x-1/2 z-10"></div>
              
              {/* Thumbnail placeholder */}
              <div className="w-full h-full bg-slate-800 dark:bg-[#0b1120] flex items-center justify-center">
@@ -51,7 +50,8 @@ export default function FeaturedVideo() {
                   </div>
                 </div>
              </div>
-          </div>
+              </div>
+           </div>
         </motion.div>
       </div>
     </Section>

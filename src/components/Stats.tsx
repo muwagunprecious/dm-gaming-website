@@ -22,15 +22,24 @@ export default function Stats() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className="space-y-3"
+            className="relative flex items-center justify-center"
           >
-            <p className="text-4xl md:text-6xl font-extrabold text-foreground tracking-tight glow-shadow">
-              {stat.value}
-            </p>
-            <div className="w-10 h-1 bg-primary/30 rounded-full"></div>
-            <p className="text-xs md:text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-              {stat.label}
-            </p>
+            <div className="relative w-56 h-56 mx-auto flex flex-col items-center justify-center p-6 border-4 border-primary/20 rounded-full bg-card shadow-[0_0_30px_rgba(0,0,0,0.5)] overflow-hidden group">
+               {/* Inner Radar Geometry */}
+               <div className="absolute inset-0 radar-sweep opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
+               <div className="absolute inset-x-0 h-[1px] bg-primary/20 top-1/2 -translate-y-1/2"></div>
+               <div className="absolute inset-y-0 w-[1px] bg-primary/20 left-1/2 -translate-x-1/2"></div>
+               
+               <div className="absolute inset-2 border-2 border-dashed border-primary/30 rounded-full animate-spin-slow"></div>
+            <div className="relative z-10 text-center space-y-2 background-blur-sm bg-black/40 px-4 py-2 rounded-xl border border-white/5">
+              <p className="text-3xl md:text-4xl font-extrabold text-foreground tracking-tight glow-shadow">
+                {stat.value}
+              </p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
+                {stat.label}
+              </p>
+            </div>
+          </div>
           </motion.div>
         ))}
       </div>

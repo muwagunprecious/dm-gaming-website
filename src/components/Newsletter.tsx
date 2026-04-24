@@ -29,9 +29,12 @@ export default function Newsletter() {
   return (
     <section className="py-32 px-6 relative overflow-hidden bg-background">
       <div className="absolute inset-0 bg-grid-pattern opacity-10 dark:opacity-30 pointer-events-none"></div>
-      <div className="max-w-6xl mx-auto">
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center bg-card dark:bg-[#050b14] border border-border-color rounded-[3rem] p-8 md:p-20 shadow-[0_0_40px_rgba(0,0,0,0.05)] dark:shadow-[0_0_50px_var(--glow-color)] overflow-hidden">
+      <div className="max-w-6xl mx-auto relative group">
+        {/* Command Bridge Outer Frame */}
+        <div className="absolute inset-[-2px] bg-gradient-to-br from-primary to-accent [clip-path:polygon(0_10%,10%_0,100%_0,100%_90%,90%_100%,0_100%)] opacity-30 group-hover:opacity-100 transition-opacity duration-700"></div>
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center bg-card dark:bg-[#050505] p-10 md:p-24 [clip-path:polygon(0_10%,10%_0,100%_0,100%_90%,90%_100%,0_100%)] shadow-[0_0_80px_var(--glow-color)]">
           {/* Subtle decoration */}
+          <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
           
           <div className="space-y-8">
@@ -79,24 +82,25 @@ export default function Newsletter() {
                       name="email"
                       type="email"
                       placeholder="Your email address"
-                      className="w-full h-16 md:h-20 px-8 bg-muted/50 border border-border-color rounded-[2rem] text-foreground outline-none focus:ring-2 focus:ring-primary focus:bg-card transition-all text-lg"
+                      className="w-full h-16 md:h-20 px-8 bg-muted/50 border-l-4 border-l-primary text-foreground outline-none focus:bg-primary/5 transition-all text-lg [clip-path:polygon(5%_0,100%_0,95%_100%,0_100%)]"
                     />
                   </div>
                   <Button
                     type="submit"
                     disabled={status === "submitting"}
-                    className="w-full h-16 md:h-20 rounded-[2rem] text-lg font-bold"
+                    className="w-full h-16 md:h-20 text-lg font-bold [clip-path:polygon(5%_0,100%_0,95%_100%,0_100%)] rounded-none relative overflow-hidden"
                   >
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full hover:animate-shimmer"></div>
                     {status === "submitting" ? (
-                      <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                      <div className="w-6 h-6 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin"></div>
                     ) : (
                       <div className="flex items-center space-x-3">
-                        <span>Subscribe for Updates</span>
+                        <span>Initialize Link</span>
                         <Send size={20} />
                       </div>
                     )}
                   </Button>
-                  <p className="text-[10px] text-slate-400 text-center uppercase tracking-[0.2em] font-bold">
+                  <p className="text-[10px] text-muted-foreground text-center uppercase tracking-[0.2em] font-bold">
                     Join 50k+ gamers. Zero spam.
                   </p>
                 </motion.form>

@@ -25,10 +25,14 @@ export default function Socials() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
             viewport={{ once: true }}
-            className={`group relative p-8 rounded-[2rem] bg-card dark:bg-[#050b14] border border-border-color shadow-[0_0_20px_rgba(0,0,0,0.02)] dark:hover:shadow-[0_0_40px_var(--glow-color)] transition-all duration-500 ${social.color} hover:text-white hover:-translate-y-2`}
+            className={`group relative py-12 px-6 h-56 bg-card dark:bg-[#050505] shadow-lg dark:hover:shadow-[0_0_60px_var(--glow-color)] transition-all duration-500 hover:-translate-y-4 text-foreground hover:text-white [clip-path:polygon(20%_0,100%_0,80%_100%,0_100%)] overflow-hidden flex items-center justify-center`}
           >
-            <div className="flex flex-col h-full justify-between items-center text-center space-y-4">
-              <div className="p-4 bg-muted/50 rounded-2xl group-hover:bg-white/20 transition-colors">
+            {/* Thruster Glow Background */}
+            <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${social.color.replace('hover:', '')} -z-10`}></div>
+            {/* Inner Geometry Border */}
+            <div className="absolute inset-[1px] bg-card [clip-path:polygon(20%_0,100%_0,80%_100%,0_100%)] -z-0 group-hover:opacity-0 transition-opacity duration-300"></div>
+            <div className="relative z-10 flex flex-col h-full justify-between items-center text-center space-y-4">
+              <div className="p-4 bg-muted/50 [clip-path:polygon(20%_0,100%_0,80%_100%,0_100%)] group-hover:bg-white/20 transition-colors">
                 <social.icon size={32} strokeWidth={1.5} />
               </div>
               <div>
