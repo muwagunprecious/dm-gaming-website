@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "./Button";
-import { Play, ArrowRight, Dot, Target, Crosshair, Radar, Shield } from "lucide-react";
+import { Radar, Target, Shield, Zap } from "lucide-react";
 
 const SpaceBackground = () => {
   const [mounted, setMounted] = React.useState(false);
@@ -13,7 +13,7 @@ const SpaceBackground = () => {
   React.useEffect(() => {
     setMounted(true);
     setStars(
-      Array.from({ length: 60 }).map((_, i) => ({
+      Array.from({ length: 80 }).map((_, i) => ({
         id: i,
         top: `${Math.random() * 100}%`,
         left: `${Math.random() * 100}%`,
@@ -53,120 +53,111 @@ const SpaceBackground = () => {
 export default function Hero() {
   const { scrollY } = useScroll();
   const yRadar = useTransform(scrollY, [0, 1000], [0, 250]);
-  const yContent = useTransform(scrollY, [0, 1000], [0, -100]);
+  const yContentLeft = useTransform(scrollY, [0, 1000], [0, -150]);
+  const yContentRight = useTransform(scrollY, [0, 1000], [0, -50]);
 
   return (
-    <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden bg-background">
+    <section className="relative min-h-screen pt-32 pb-24 overflow-hidden bg-background">
       <SpaceBackground />
-      {/* Space & Gaming Background Effects */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none z-0"></div>
+      <div className="data-spine h-full"></div>
       
-      {/* Radar Sweep Animation */}
-      <motion.div style={{ y: yRadar }} className="absolute top-1/2 left-1/4 w-[800px] h-[800px] border border-primary/20 rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-10">
-        <div className="absolute inset-0 radar-sweep opacity-20"></div>
-        <div className="absolute inset-0 border-[40px] border-background rounded-full mix-blend-overlay"></div>
-        <div className="absolute top-1/2 w-full h-[1px] bg-primary/20"></div>
-        <div className="absolute left-1/2 w-[1px] h-full bg-primary/20"></div>
-      </motion.div>
-      
-      <div className="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/3 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+      {/* Central Axis Point */}
+      <div className="data-spine-point top-[150px]"></div>
 
-      <motion.div style={{ y: yContent }} className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
-        {/* Left Content */}
+      <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-2 relative z-10">
+        
+        {/* Left Content - Tactical Intel */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="space-y-6"
+          style={{ y: yContentLeft }}
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, type: "spring" }}
+          className="lg:pr-24 space-y-12 flex flex-col justify-center"
         >
-          {/* Status Badge */}
-          <div className="relative inline-flex group">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
-            <div className="relative inline-flex items-center space-x-2 px-4 py-1.5 bg-card border border-border-color rounded-full shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#0ea5e9] animate-pulse glow-shadow"></span>
-              <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-wider text-primary opacity-80">
-                Live & Creating
-              </span>
+          <div className="space-y-4">
+            <div className="inline-flex items-center space-x-2 text-primary font-bold text-[10px] tracking-[0.5em] uppercase">
+              <Zap size={14} className="animate-glitch" />
+              <span>Link Established // 0x4F2A</span>
+            </div>
+            
+            <h1 className="text-6xl md:text-8xl font-black text-foreground leading-[0.9] tracking-tighter">
+              DMS<span className="text-primary animate-glitch">_</span><br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-white to-primary bg-300% animate-shimmer">OPERATOR</span>
+            </h1>
+          </div>
+
+          <div className="relative p-8 bg-card border-l-4 border-primary/40 [clip-path:polygon(0_0,100%_0,100%_80%,80%_100%,0_100%)]">
+            <div className="absolute top-0 right-0 p-2 text-[8px] font-mono text-primary/30">INTEL_LOG_884</div>
+            <p className="text-xl text-muted-foreground leading-relaxed italic border-b border-white/5 pb-6">
+              "The battlefield isn't just a place — it's a series of calculated maneuvers and split-second decisions."
+            </p>
+            <div className="flex flex-wrap gap-4 mt-6">
+              <Button size="lg" className="rounded-none [clip-path:polygon(10%_0,100%_0,90%_100%,0_100%)] bg-primary text-black font-black uppercase tracking-widest text-xs px-12 group">
+                <span className="group-hover:animate-glitch inline-block">Execute Mission</span>
+              </Button>
             </div>
           </div>
-
-          <div className="relative inline-block mt-4 mb-4">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-foreground leading-[1] tracking-tight">
-              Hi, I’m <span className="relative text-primary">DMS.</span>
-            </h1>
-            <div className="absolute -bottom-4 left-0 w-full h-1.5 bg-primary/20 rounded-full"></div>
-            <div className="absolute -bottom-4 left-0 w-1/3 h-1.5 bg-primary rounded-full"></div>
-          </div>
-
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-xl leading-relaxed pt-4">
-            <span className="font-bold text-foreground">Africa's Elite Gamer & Content Creator</span> building <span className="text-foreground underline decoration-2 decoration-primary/50 underline-offset-4 glow-shadow">world-class gaming experiences</span>. Professional Champion and Esports Pioneer.
-          </p>
-
-          <div className="flex flex-wrap gap-5 pt-4">
-            <Button size="lg" className="group space-x-3 rounded-2xl relative overflow-hidden">
-              <span className="relative z-10">Watch Stream</span>
-              <Radar size={20} className="relative z-10 animate-pulse text-white/80" />
-            </Button>
-            <Button variant="outline" size="lg" className="space-x-3 rounded-2xl border-primary/40 group">
-              <span className="text-primary font-bold group-hover:text-primary-foreground">Inquire for Projects</span>
-              <div className="p-1 border border-primary/20 rounded-md group-hover:border-primary-foreground/30">
-                 <Target size={16} className="text-primary group-hover:text-primary-foreground" />
-              </div>
-            </Button>
-          </div>
         </motion.div>
 
-        {/* Right Content */}
+        {/* Right Content - Visual Profile */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative px-4"
+          style={{ y: yContentRight }}
+          initial={{ opacity: 0, scale: 1.1, x: 50 }}
+          animate={{ opacity: 1, scale: 1, x: 0 }}
+          transition={{ duration: 1.2, delay: 0.2 }}
+          className="relative lg:pl-12 pt-20"
         >
-          {/* Portrait Container */}
-          <div className="relative aspect-[4/5] rounded-[3rem] p-2 bg-gradient-to-b from-primary/20 to-transparent shadow-[0_0_80px_var(--glow-color)] group">
-             {/* HUD Corners */}
-             <div className="hud-corner top-0 left-0 border-t-2 border-l-2 rounded-tl-3xl"></div>
-             <div className="hud-corner top-0 right-0 border-t-2 border-r-2 rounded-tr-3xl"></div>
-             <div className="hud-corner bottom-0 left-0 border-b-2 border-l-2 rounded-bl-3xl"></div>
-             <div className="hud-corner bottom-0 right-0 border-b-2 border-r-2 rounded-br-3xl"></div>
-             
-             <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden bg-card">
-               <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 to-transparent mix-blend-overlay z-10 pointer-events-none"></div>
-             <Image 
-                src="/images/hero-dms.png" 
-                alt="DMS - African Gaming Champion"
-                fill
-                className="object-cover transition-all duration-700 hover:scale-105 z-0"
-                priority
-             />
-             </div>
-          </div>
+          {/* Holographic Frame */}
+          <div className="relative aspect-[3/4] w-full max-w-[500px] mx-auto group">
+            <motion.div 
+               animate={{ rotate: [0, 360] }}
+               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+               className="absolute inset-[-10%] border border-primary/10 rounded-full border-dashed" 
+            />
+            
+            {/* HUD Elements around the image */}
+            <div className="absolute -top-10 -right-10 w-32 space-y-2 hidden lg:block">
+              <div className="h-0.5 w-full bg-primary/20"></div>
+              <div className="flex justify-between text-[10px] font-bold text-primary">
+                <span>BIO_SYNC</span>
+                <span>98.2%</span>
+              </div>
+            </div>
 
-          {/* Floating UI Elements */}
-          <div className="absolute -bottom-20 left-10 space-y-3 hidden md:block z-20">
-             <motion.div 
-               initial={{ x: -20, opacity: 0 }}
-               animate={{ x: 0, opacity: 1 }}
-               transition={{ delay: 0.5 }}
-               className="glass px-5 py-3 rounded-2xl flex items-center space-x-3 shadow-xl glow-shadow"
-             >
-                <div className="p-1.5 bg-primary border-2 border-primary-foreground/20 rounded-lg text-primary-foreground">
-                   <Target size={16} fill="currentColor" />
-                </div>
-                <span className="text-sm font-bold text-foreground">Target Acquired</span>
-             </motion.div>
-             <motion.div 
-               initial={{ x: -20, opacity: 0 }}
-               animate={{ x: 0, opacity: 1 }}
-               transition={{ delay: 0.7 }}
-               className="glass px-5 py-3 rounded-2xl flex items-center space-x-3 shadow-lg border-l-2 border-l-accent"
-             >
-                <span className="text-sm font-bold text-foreground">Shield Systems Active</span>
-                <Shield size={16} className="text-accent" />
-             </motion.div>
+            <div className="relative w-full h-full bg-black/50 [clip-path:polygon(20%_0,100%_0,100%_80%,80%_100%,0_100%,0_20%)] overflow-hidden border border-primary/20 shadow-[0_0_100px_rgba(14,165,233,0.1)]">
+              <Image 
+                src="/images/hero-dms.png" 
+                alt="DMS"
+                fill
+                className="object-cover opacity-90 grayscale group-hover:grayscale-0 transition-all duration-700 hover:scale-110"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-primary/10"></div>
+              
+              {/* Scanline overlay */}
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%] pointer-events-none"></div>
+            </div>
+
+            {/* Float Cards */}
+            <motion.div 
+              animate={{ y: [-10, 10, -10] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -bottom-10 -left-10 bg-primary/10 backdrop-blur-md border border-primary/30 p-6 flex flex-col items-center justify-center space-y-1 shadow-[0_0_40px_rgba(14,165,233,0.2)]"
+            >
+              <Target size={24} className="text-primary mb-2" />
+              <div className="text-2xl font-black text-white">#01</div>
+              <div className="text-[8px] font-bold text-primary tracking-widest uppercase">Global Rank</div>
+            </motion.div>
           </div>
         </motion.div>
+      </div>
+
+      {/* Extreme background radar */}
+      <motion.div 
+        style={{ y: yRadar }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] border border-primary/5 rounded-full pointer-events-none -z-20"
+      >
+        <div className="absolute inset-0 radar-sweep opacity-5"></div>
       </motion.div>
     </section>
   );

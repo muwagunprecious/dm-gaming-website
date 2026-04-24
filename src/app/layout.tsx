@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { Cursor } from "@/components/Cursor";
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -20,8 +21,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${jakarta.variable} font-sans antialiased h-full scroll-smooth`}>
-      <body className="min-h-full bg-background text-foreground selection:bg-primary/20 selection:text-primary transition-colors duration-300 scanlines">
+    <html lang="en" suppressHydrationWarning className={`${jakarta.variable} font-sans antialiased h-full scroll-smooth custom-cursor-none`}>
+      <body className="min-h-full bg-background text-foreground selection:bg-primary/20 selection:text-primary transition-colors duration-300 scanlines overflow-x-hidden">
+        {/* Cockpit HUD Brackets */}
+        <div className="cockpit-bracket bracket-tl"></div>
+        <div className="cockpit-bracket bracket-tr"></div>
+        <div className="cockpit-bracket bracket-bl"></div>
+        <div className="cockpit-bracket bracket-br"></div>
+        
+        <Cursor />
+
         {/* Persistent Nebula Orbs */}
         <div className="nebula-orb w-[600px] h-[600px] bg-primary/20 top-[10%] left-[-10%] fixed -z-10"></div>
         <div className="nebula-orb w-[500px] h-[500px] bg-accent/15 bottom-[20%] right-[-8%] fixed -z-10" style={{animationDelay:'4s'}}></div>
