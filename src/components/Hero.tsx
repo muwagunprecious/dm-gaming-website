@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "./Button";
 import { Play, ArrowRight, Dot, Target, Crosshair, Radar, Shield } from "lucide-react";
 
@@ -25,8 +25,11 @@ const SpaceBackground = () => {
 
   if (!mounted) return null;
 
+  const { scrollY } = useScroll();
+  const yStars = useTransform(scrollY, [0, 1000], [0, 400]);
+
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+    <motion.div style={{ y: yStars }} className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       {stars.map((star) => (
         <div
           key={star.id}
@@ -43,11 +46,15 @@ const SpaceBackground = () => {
       <div className="meteor" style={{ top: '40%', left: '90%', animationDelay: '2.5s' }}></div>
       <div className="meteor" style={{ top: '0%', left: '50%', animationDelay: '5s' }}></div>
       <div className="meteor" style={{ top: '60%', left: '100%', animationDelay: '7.5s' }}></div>
-    </div>
+    </motion.div>
   );
 };
 
 export default function Hero() {
+  const { scrollY } = useScroll();
+  const yRadar = useTransform(scrollY, [0, 1000], [0, 250]);
+  const yContent = useTransform(scrollY, [0, 1000], [0, -100]);
+
   return (
     <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden bg-background">
       <SpaceBackground />
@@ -55,16 +62,16 @@ export default function Hero() {
       <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none z-0"></div>
       
       {/* Radar Sweep Animation */}
-      <div className="absolute top-1/2 left-1/4 w-[800px] h-[800px] border border-primary/20 rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-10">
+      <motion.div style={{ y: yRadar }} className="absolute top-1/2 left-1/4 w-[800px] h-[800px] border border-primary/20 rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-10">
         <div className="absolute inset-0 radar-sweep opacity-20"></div>
         <div className="absolute inset-0 border-[40px] border-background rounded-full mix-blend-overlay"></div>
         <div className="absolute top-1/2 w-full h-[1px] bg-primary/20"></div>
         <div className="absolute left-1/2 w-[1px] h-full bg-primary/20"></div>
-      </div>
+      </motion.div>
       
       <div className="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/3 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
+      <motion.div style={{ y: yContent }} className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
         {/* Left Content */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -160,7 +167,7 @@ export default function Hero() {
              </motion.div>
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }
