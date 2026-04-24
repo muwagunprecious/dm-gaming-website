@@ -23,10 +23,10 @@ const SpaceBackground = () => {
     );
   }, []);
 
-  if (!mounted) return null;
-
   const { scrollY } = useScroll();
   const yStars = useTransform(scrollY, [0, 1000], [0, 400]);
+
+  if (!mounted) return null;
 
   return (
     <motion.div style={{ y: yStars }} className="absolute inset-0 overflow-hidden pointer-events-none z-0">
