@@ -8,10 +8,6 @@ export function Cursor() {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  const springConfig = { damping: 15, stiffness: 800, mass: 0.2 };
-  const sx = useSpring(cursorX, springConfig);
-  const sy = useSpring(cursorY, springConfig);
-
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
@@ -46,8 +42,8 @@ export function Cursor() {
       {/* Outer Targeting Ring */}
       <motion.div
         style={{
-          left: sx,
-          top: sy,
+          left: cursorX,
+          top: cursorY,
           x: "-50%",
           y: "-50%",
         }}
@@ -67,8 +63,8 @@ export function Cursor() {
       {/* Central Laser Dot */}
       <motion.div
         style={{
-          left: sx,
-          top: sy,
+          left: cursorX,
+          top: cursorY,
           x: "-50%",
           y: "-50%",
         }}
@@ -83,8 +79,8 @@ export function Cursor() {
       {isHovering && (
         <motion.div
           style={{
-            left: sx,
-            top: sy,
+            left: cursorX,
+            top: cursorY,
           }}
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 50 }}
