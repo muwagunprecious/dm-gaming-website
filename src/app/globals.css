@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Forced Dark Theme: Pure Black Space/Gaming */
+  --background: #000000;
+  --foreground: #f8fafc;
+  --primary: #0ea5e9; /* Neon Cyan */
+  --primary-foreground: #000000;
+  --accent: #ef4444; /* Laser Red */
+  --muted: #0b1120;
+  --muted-foreground: #64748b;
+  --card: #050505;
+  --card-foreground: #f8fafc;
+  --glow-color: rgba(14, 165, 233, 0.5);
+  --border-color: #1e293b;
+  --radius: 1.5rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  
+  --radius-xl: var(--radius);
+  --radius-lg: calc(var(--radius) - 0.25rem);
+  --radius-md: calc(var(--radius) - 0.5rem);
+  --radius-sm: calc(var(--radius) - 0.75rem);
+
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui;
+}
+
+* {
+  @apply border-[var(--border-color)];
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+.glass {
+  @apply bg-black/50 backdrop-blur-xl border border-white/10;
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+}
+
+/* Space Grid Pattern */
+.bg-grid-pattern {
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+  mask-image: radial-gradient(circle at center, black, transparent 80%);
+}
+
+/* Radar & HUD Animations */
+@keyframes radar-sweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.radar-sweep {
+  animation: radar-sweep 4s linear infinite;
+  background: conic-gradient(from 0deg, transparent 70%, var(--primary) 100%);
+  border-radius: 50%;
+}
+
+.hud-corner {
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-color: var(--primary);
+  opacity: 0.6;
+}
+
+.glow-shadow {
+  box-shadow: 0 0 40px var(--glow-color);
+}
