@@ -21,10 +21,10 @@ export default function Socials() {
           <motion.a
             key={social.name}
             href={social.link}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 60, skewX: index % 2 === 0 ? -10 : 10 }}
+            whileInView={{ opacity: 1, y: 0, skewX: 0 }}
+            transition={{ delay: index * 0.12, duration: 0.7, type: "spring", stiffness: 80, damping: 14 }}
+            viewport={{ once: true, margin: "-60px" }}
             className={`group relative py-12 px-6 h-56 bg-card dark:bg-[#050505] shadow-lg dark:hover:shadow-[0_0_60px_var(--glow-color)] transition-all duration-500 hover:-translate-y-4 text-foreground hover:text-white [clip-path:polygon(20%_0,100%_0,80%_100%,0_100%)] overflow-hidden flex items-center justify-center`}
           >
             {/* Thruster Glow Background */}

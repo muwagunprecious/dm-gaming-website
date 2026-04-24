@@ -18,10 +18,10 @@ export default function Stats() {
         {stats.map((stat, index) => (
           <motion.div
             key={stat.label}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, scale: 0.4, rotate: -180 }}
+            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ duration: 0.9, delay: index * 0.15, type: "spring", stiffness: 80, damping: 14 }}
+            viewport={{ once: true, margin: "-80px" }}
             className="relative flex items-center justify-center"
           >
             <div className="relative w-56 h-56 mx-auto flex flex-col items-center justify-center p-6 border-4 border-primary/20 rounded-full bg-card shadow-[0_0_30px_rgba(0,0,0,0.5)] overflow-hidden group">

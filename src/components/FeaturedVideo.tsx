@@ -9,18 +9,25 @@ export default function FeaturedVideo() {
   return (
     <Section className="bg-background">
       <div className="space-y-16">
-        <div className="flex flex-col md:flex-row justify-between items-end gap-10">
+        <motion.div
+          initial={{ opacity: 0, x: -60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, type: "spring", stiffness: 70 }}
+          viewport={{ once: true }}
+          className="flex flex-col md:flex-row justify-between items-end gap-10"
+        >
           <div className="space-y-6">
-            <h2 className="text-4xl md:text-6xl font-extrabold text-foreground tracking-tight leading-tight glow-shadow">Latest Content</h2>
+            <h2 className="text-4xl md:text-6xl font-extrabold text-foreground tracking-tight leading-tight glow-shadow glow-text-pulse">Latest Content</h2>
             <p className="text-muted-foreground text-lg md:text-xl max-w-xl leading-relaxed">Stay updated with the newest tactical breakdowns, high-level gameplay, and exclusive streams.</p>
           </div>
           <button className="text-[11px] font-bold text-primary uppercase tracking-[0.2em] hover:opacity-70 transition-opacity border-b-2 border-primary/20 pb-1">View All Videos</button>
-        </div>
+        </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 80, scale: 0.96 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 1, type: "spring", stiffness: 55, damping: 15, delay: 0.1 }}
+          viewport={{ once: true, margin: "-80px" }}
           className="relative group cursor-pointer"
         >
           {/* Big Video Card: Weaponized Chassis */}

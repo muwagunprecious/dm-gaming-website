@@ -89,7 +89,23 @@ body {
   box-shadow: 0 0 40px var(--glow-color);
 }
 
-/* Twinkling Stars */
+/* ─── Scanline Overlay ─────────────────────────────────── */
+.scanlines::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ─── Twinkling Stars ──────────────────────────────────── */
 .star {
   position: absolute;
   width: 2px;
@@ -101,22 +117,14 @@ body {
 
 @keyframes twinkle {
   0% { opacity: 0.1; transform: scale(0.8); }
-  100% { opacity: 1; transform: scale(1.5) drop-shadow(0 0 4px white); }
+  100% { opacity: 1; transform: scale(1.5); filter: drop-shadow(0 0 4px white); }
 }
 
-/* Shooting Stars */
+/* ─── Shooting Stars ───────────────────────────────────── */
 @keyframes meteor {
-  0% { 
-    transform: rotate(215deg) translateX(0); 
-    opacity: 1; 
-  }
-  70% { 
-    opacity: 1; 
-  }
-  100% { 
-    transform: rotate(215deg) translateX(-1000px); 
-    opacity: 0; 
-  }
+  0% { transform: rotate(215deg) translateX(0); opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: rotate(215deg) translateX(-1000px); opacity: 0; }
 }
 
 .meteor {
@@ -136,4 +144,37 @@ body {
   right: 0;
   top: -1px;
   box-shadow: 0 0 15px 3px var(--primary);
+}
+
+/* ─── Nebula Orbs ──────────────────────────────────────── */
+@keyframes nebula-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.12; }
+  50% { transform: scale(1.15); opacity: 0.22; }
+}
+
+.nebula-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: nebula-pulse 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ─── Section Title Glow Pulse ─────────────────────────── */
+@keyframes text-glow-pulse {
+  0%, 100% { text-shadow: 0 0 20px var(--glow-color), 0 0 60px var(--glow-color); }
+  50% { text-shadow: 0 0 40px var(--glow-color), 0 0 100px var(--glow-color), 0 0 140px rgba(14,165,233,0.2); }
+}
+
+.glow-text-pulse {
+  animation: text-glow-pulse 4s ease-in-out infinite;
+}
+
+/* ─── Spin Slow ────────────────────────────────────────── */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
 }

@@ -21,7 +21,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className={`${jakarta.variable} font-sans antialiased h-full scroll-smooth`}>
-      <body className="min-h-full bg-background text-foreground selection:bg-primary/20 selection:text-primary transition-colors duration-300">
+      <body className="min-h-full bg-background text-foreground selection:bg-primary/20 selection:text-primary transition-colors duration-300 scanlines">
+        {/* Persistent Nebula Orbs */}
+        <div className="nebula-orb w-[600px] h-[600px] bg-primary/20 top-[10%] left-[-10%] fixed -z-10"></div>
+        <div className="nebula-orb w-[500px] h-[500px] bg-accent/15 bottom-[20%] right-[-8%] fixed -z-10" style={{animationDelay:'4s'}}></div>
+        <div className="nebula-orb w-[400px] h-[400px] bg-primary/10 top-[60%] left-[40%] fixed -z-10" style={{animationDelay:'2s'}}></div>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

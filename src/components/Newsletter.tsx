@@ -29,7 +29,13 @@ export default function Newsletter() {
   return (
     <section className="py-32 px-6 relative overflow-hidden bg-background">
       <div className="absolute inset-0 bg-grid-pattern opacity-10 dark:opacity-30 pointer-events-none"></div>
-      <div className="max-w-6xl mx-auto relative group">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.92, y: 60 }}
+        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 1.1, type: "spring", stiffness: 50, damping: 16 }}
+        viewport={{ once: true, margin: "-80px" }}
+        className="max-w-6xl mx-auto relative group"
+      >
         {/* Command Bridge Outer Frame */}
         <div className="absolute inset-[-2px] bg-gradient-to-br from-primary to-accent [clip-path:polygon(0_10%,10%_0,100%_0,100%_90%,90%_100%,0_100%)] opacity-30 group-hover:opacity-100 transition-opacity duration-700"></div>
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center bg-card dark:bg-[#050505] p-10 md:p-24 [clip-path:polygon(0_10%,10%_0,100%_0,100%_90%,90%_100%,0_100%)] shadow-[0_0_80px_var(--glow-color)]">
@@ -108,7 +114,7 @@ export default function Newsletter() {
             </AnimatePresence>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

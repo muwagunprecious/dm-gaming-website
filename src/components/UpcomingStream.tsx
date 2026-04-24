@@ -14,13 +14,19 @@ export default function UpcomingStream() {
         <div className="absolute inset-0 bg-grid-pattern opacity-30 dark:opacity-50 pointer-events-none"></div>
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] transform translate-x-1/2 -translate-y-1/2"></div>
         
-        <div className="space-y-10 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, x: -80 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, type: "spring", stiffness: 60, damping: 16 }}
+          viewport={{ once: true, margin: "-60px" }}
+          className="space-y-10 relative z-10"
+        >
           <div className="inline-flex items-center space-x-3 px-4 py-2 bg-muted rounded-full text-[11px] font-bold uppercase tracking-[0.2em] leading-none text-foreground border border-border-color shadow-sm">
             <span className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse glow-shadow"></span>
             <span>Upcoming Stream</span>
           </div>
           
-          <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] glow-shadow">
+          <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] glow-shadow glow-text-pulse">
             Grand Finals: <br /> Africa Showdown
           </h2>
           
@@ -42,12 +48,13 @@ export default function UpcomingStream() {
           <Button size="lg" className="rounded-[2rem] font-black uppercase tracking-[0.1em] shadow-[0_0_20px_var(--glow-color)] transition-all">
             <span>Remind Me</span>
           </Button>
-        </div>
+        </motion.div>
 
         <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, x: 80, rotate: 3 }}
+          whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+          transition={{ duration: 0.9, type: "spring", stiffness: 60, damping: 14, delay: 0.2 }}
+          viewport={{ once: true, margin: "-60px" }}
           className="relative aspect-video lg:aspect-square bg-slate-900 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-border-color dark:border-primary/20 glow-shadow z-10"
         >
           {/* Stream Thumbnail Placeholder */}
