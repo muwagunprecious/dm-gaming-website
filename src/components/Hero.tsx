@@ -6,11 +6,53 @@ import { motion } from "framer-motion";
 import { Button } from "./Button";
 import { Play, ArrowRight, Dot, Target, Crosshair, Radar, Shield } from "lucide-react";
 
+const SpaceBackground = () => {
+  const [mounted, setMounted] = React.useState(false);
+  const [stars, setStars] = React.useState<{ id: number; top: string; left: string; duration: string; delay: string }[]>([]);
+
+  React.useEffect(() => {
+    setMounted(true);
+    setStars(
+      Array.from({ length: 60 }).map((_, i) => ({
+        id: i,
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        duration: `${Math.random() * 3 + 1.5}s`,
+        delay: `${Math.random() * 2}s`,
+      }))
+    );
+  }, []);
+
+  if (!mounted) return null;
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      {stars.map((star) => (
+        <div
+          key={star.id}
+          className="star"
+          style={{
+            top: star.top,
+            left: star.left,
+            animationDuration: star.duration,
+            animationDelay: star.delay,
+          }}
+        />
+      ))}
+      <div className="meteor" style={{ top: '15%', left: '70%', animationDelay: '0s' }}></div>
+      <div className="meteor" style={{ top: '40%', left: '90%', animationDelay: '2.5s' }}></div>
+      <div className="meteor" style={{ top: '0%', left: '50%', animationDelay: '5s' }}></div>
+      <div className="meteor" style={{ top: '60%', left: '100%', animationDelay: '7.5s' }}></div>
+    </div>
+  );
+};
+
 export default function Hero() {
   return (
     <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden bg-background">
+      <SpaceBackground />
       {/* Space & Gaming Background Effects */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none z-0"></div>
       
       {/* Radar Sweep Animation */}
       <div className="absolute top-1/2 left-1/4 w-[800px] h-[800px] border border-primary/20 rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-10">
