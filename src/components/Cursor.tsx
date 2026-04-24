@@ -8,7 +8,7 @@ export function Cursor() {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  const springConfig = { damping: 25, stiffness: 200 };
+  const springConfig = { damping: 15, stiffness: 800, mass: 0.2 };
   const sx = useSpring(cursorX, springConfig);
   const sy = useSpring(cursorY, springConfig);
 
